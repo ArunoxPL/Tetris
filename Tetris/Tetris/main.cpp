@@ -5,6 +5,8 @@ using namespace sf;
 const int M = 20;
 const int N = 10;
 
+// Postaram sie jeszce to dodac
+
 int field[M][N] = { 0 };
 
 struct Point
