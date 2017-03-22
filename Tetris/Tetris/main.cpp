@@ -1,20 +1,18 @@
 #include <SFML/Graphics.hpp>
+#include "Frog.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(640, 480), "SFML Starter Template");
+	sf::RenderWindow window(sf::VideoMode(640, 480), "SFML Starter Template", sf::Style::Close);
 
-	sf::RectangleShape frog;
-
-	frog.setSize(sf::Vector2f(80, 80));
-	frog.setPosition(sf::Vector2f(frog.getPosition().x, window.getSize().y - frog.getSize().y));
-
-
+	Frog frog(window.getSize());
+	
 	sf::RectangleShape truck;
 
 	truck.setSize(sf::Vector2f(120, 60));
 	truck.setFillColor(sf::Color::Red);
 	truck.setPosition(sf::Vector2f(truck.getPosition().x, window.getSize().y / 2 - truck.getSize().y));
+	
 
 	while (window.isOpen())
 	{
@@ -26,23 +24,7 @@ int main()
 			switch (event.type)
 			{
 			case sf::Event::KeyReleased:
-
-				if (sf::Keyboard::Key::Left == event.key.code)
-				{
-					frog.move(-80, 0);
-				}
-				else if (sf::Keyboard::Key::Right == event.key.code)
-				{
-					frog.move(80, 0);
-				}
-				else if (sf::Keyboard::Key::Up == event.key.code)
-				{
-					frog.move(0, -80);
-				}
-				else if (sf::Keyboard::Key::Down == event.key.code)
-				{
-					frog.move(0, 80);
-				}
+				frog.Move(event);
 			}
 		}
 
@@ -54,17 +36,18 @@ int main()
 			truck.setPosition(sf::Vector2f(-truck.getSize().x, window.getSize().y / 2 - truck.getSize().y));
 		}
 
-		if (frog.getGlobalBounds().intersects(truck.getGlobalBounds()))
+		if (frog.GetShape().getGlobalBounds().intersects(truck.getGlobalBounds()))
 		{
 			window.close();
+			//frog.GetShape().setPosition(sf::Vector2f(frog.getPosition().x, window.getSize().y - frog.getSize().y));
 		}
 
 		window.clear();
 
 		// draw SFML content
-		window.draw(frog);
+		
 		window.draw(truck);
-
+		frog.Draw(window);
 		window.display();
 	}
 
