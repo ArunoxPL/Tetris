@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Frog.h"
+#include "Truck.h"
 
 int main()
 {
@@ -7,12 +8,7 @@ int main()
 
 	Frog frog(window.getSize());
 	
-	sf::RectangleShape truck;
-
-	truck.setSize(sf::Vector2f(120, 60));
-	truck.setFillColor(sf::Color::Red);
-	truck.setPosition(sf::Vector2f(truck.getPosition().x, window.getSize().y / 2 - truck.getSize().y));
-	
+	Truck truck(window.getSize(),  0, window.getSize().y / 2);
 
 	while (window.isOpen())
 	{
@@ -29,14 +25,10 @@ int main()
 		}
 
 		// update
-		truck.move(0.2, 0);
+		
+		truck.Move(window.getSize());
 
-		if (truck.getPosition().x > window.getSize().x)
-		{
-			truck.setPosition(sf::Vector2f(-truck.getSize().x, window.getSize().y / 2 - truck.getSize().y));
-		}
-
-		if (frog.GetShape().getGlobalBounds().intersects(truck.getGlobalBounds()))
+		if (frog.GetShape().getGlobalBounds().intersects(truck.GetShape().getGlobalBounds()))
 		{
 			window.close();
 			//frog.GetShape().setPosition(sf::Vector2f(frog.getPosition().x, window.getSize().y - frog.getSize().y));
@@ -46,7 +38,7 @@ int main()
 
 		// draw SFML content
 		
-		window.draw(truck);
+		truck.Draw(window);
 		frog.Draw(window);
 		window.display();
 	}

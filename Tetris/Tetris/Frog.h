@@ -3,10 +3,9 @@
 class Frog
 {
 public:
-	Frog( sf::Vector2u size);
+	Frog( sf::Vector2u size);				//Konstruktor Klacy Frog
 	void Draw(sf::RenderWindow &window);
 	void Move(sf::Event event);
-
 	sf::RectangleShape GetShape();
 
 private:
