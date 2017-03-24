@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Frog.h"
-#include "Game.h"
+#include "Truck.h"
 class Game
 {
 public:
@@ -10,6 +10,8 @@ public:
 
 	void Loop();
 private:
-
+	sf::RenderWindow *window;
+	Truck *truck;
+	Frog *frog;
 };
 
